@@ -124,7 +124,7 @@
 </template>
 
 <script>
-import Cart from '@/components/Cart'
+import Cart from '../components/Cart'
 
 export default {
   components: { Cart },
@@ -132,17 +132,6 @@ export default {
     return {
       errorMessage: '',
     }
-  },
-  computed: {
-    isCartOpen() {
-      return this.$cart.getState().open
-    },
-    products() {
-      return this.$cart.getState().items
-    },
-    hasError() {
-      return this.errorMessage !== ''
-    },
   },
   methods: {
     async checkout({ email }) {

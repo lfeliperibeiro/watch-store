@@ -1,6 +1,21 @@
 <template>
   <div
-    class="fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300"
+    class="
+      fixed
+      right-0
+      top-0
+      max-w-xs
+      w-full
+      h-full
+      px-6
+      py-4
+      transition
+      duration-300
+      transform
+      overflow-y-auto
+      bg-white
+      border-l-2 border-gray-300
+    "
     :class="{ hidden: !isOpen }"
     data-testid="shopping-cart"
   >
@@ -52,13 +67,38 @@
           id="email"
           v-model="email"
           type="email"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="
+            shadow
+            appearance-none
+            border
+            rounded
+            w-full
+            py-2
+            px-3
+            text-gray-700
+            leading-tight
+            focus:outline-none focus:shadow-outline
+          "
         />
       </div>
       <button
         data-testid="checkout-button"
         type="submit"
-        class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+        class="
+          flex
+          items-center
+          justify-center
+          mt-4
+          px-3
+          py-2
+          bg-blue-600
+          text-white text-sm
+          uppercase
+          font-medium
+          rounded
+          hover:bg-blue-500
+          focus:outline-none focus:bg-blue-500
+        "
       >
         <span>Checkout</span>
         <svg
@@ -78,7 +118,7 @@
 </template>
 
 <script>
-import CartItem from '@/components/CartItem';
+import CartItem from './CartItem'
 export default {
   components: { CartItem },
   props: {
@@ -90,30 +130,30 @@ export default {
       type: Array,
       default: () => {
         /* istanbul ignore next */
-        return [];
+        return []
       },
     },
   },
   data() {
     return {
       email: '',
-    };
+    }
   },
   computed: {
     hasProducts() {
-      return this.products.length > 0;
+      return this.products.length > 0
     },
   },
   methods: {
     close() {
-      this.$emit('close');
+      this.$emit('close')
     },
     checkout() {
       /* istanbul ignore else */
       if (this.email) {
-        this.$emit('checkout', { email: this.email });
+        this.$emit('checkout', { email: this.email })
       }
     },
   },
-};
+}
 </script>
