@@ -9,7 +9,15 @@
         >{{ quantityLabel }}</span
       >
       <div
-        class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6"
+        class="
+          grid
+          gap-6
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          xl:grid-cols-4
+          mt-6
+        "
       >
         <product-card
           v-for="product in list"
@@ -24,8 +32,8 @@
 </template>
 
 <script>
-import ProductCard from '@/components/ProductCard';
-import Search from '@/components/Search';
+import ProductCard from '../components/ProductCard'
+import Search from '../components/Search'
 
 export default {
   components: { ProductCard, Search },
@@ -34,36 +42,36 @@ export default {
       products: [],
       errorMessage: '',
       searchTerm: '',
-    };
+    }
   },
   computed: {
     list() {
       if (this.searchTerm !== '') {
         return this.products.filter(({ title }) => {
-          return title.includes(this.searchTerm);
-        });
+          return title.includes(this.searchTerm)
+        })
       }
-      return this.products;
+      return this.products
     },
     quantityLabel() {
       const {
         list: { length },
-      } = this;
+      } = this
 
-      return length === 1 ? `${length} Product` : `${length} Products`;
+      return length === 1 ? `${length} Product` : `${length} Products`
     },
   },
   async created() {
     try {
-      this.products = (await this.$axios.get('/api/products')).data.products;
+      this.products = (await this.$axios.get('/api/products')).data.products
     } catch (error) {
-      this.errorMessage = 'Problemas ao carregar a lista!';
+      this.errorMessage = 'Problemas ao carregar a lista!'
     }
   },
   methods: {
     setSearchTerm({ term }) {
-      this.searchTerm = term;
+      this.searchTerm = term
     },
   },
-};
+}
 </script>
