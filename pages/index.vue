@@ -48,17 +48,10 @@ export default {
     list() {
       if (this.searchTerm !== '') {
         return this.products.filter(({ title }) => {
-          return title.includes(this.searchTerm)
+          return !(title.indexOf(this.searchTerm) <= -1)
         })
       }
       return this.products
-    },
-    quantityLabel() {
-      const {
-        list: { length },
-      } = this
-
-      return length === 1 ? `${length} Product` : `${length} Products`
     },
   },
   async created() {
