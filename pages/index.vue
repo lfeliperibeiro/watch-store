@@ -48,7 +48,7 @@ export default {
     list() {
       if (this.searchTerm !== '') {
         return this.products.filter(({ title }) => {
-          return !(title.indexOf(this.searchTerm) <= -1)
+          return title.includes(this.searchTerm)
         })
       }
       return this.products
