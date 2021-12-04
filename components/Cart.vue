@@ -22,13 +22,6 @@
     <div class="flex items-center justify-between">
       <h3 class="text-2xl font-medium text-gray-700">Your cart</h3>
       <button
-        v-if="hasProducts"
-        data-testid="clear-cart-button"
-        @click="$cart.clearProducts()"
-      >
-        clear cart
-      </button>
-      <button
         data-testid="close-button"
         class="text-gray-600 focus:outline-none"
         @click="close"
@@ -126,33 +119,10 @@ export default {
       type: Boolean,
       default: false,
     },
-    products: {
-      type: Array,
-      default: () => {
-        /* istanbul ignore next */
-        return []
-      },
-    },
-  },
-  data() {
-    return {
-      email: '',
-    }
-  },
-  computed: {
-    hasProducts() {
-      return this.products.length > 0
-    },
   },
   methods: {
     close() {
       this.$emit('close')
-    },
-    checkout() {
-      /* istanbul ignore else */
-      if (this.email) {
-        this.$emit('checkout', { email: this.email })
-      }
     },
   },
 }
