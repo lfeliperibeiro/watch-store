@@ -17,4 +17,9 @@ describe('Cart', () => {
     expect(wrapper.emitted().close).toBeTruthy()
     expect(wrapper.emitted().close).toHaveLength(1)
   })
+
+  it('should hide the cart when no prop isOpen', () => {
+    const wrapper = mount(Cart)
+    expect(wrapper.classes()).toContain('hidden')
+  })
 })
