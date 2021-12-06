@@ -70,17 +70,5 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      quantity: 1,
-    };
-  },
-  methods: {
-    decrease() {
-      if (this.quantity > 0) {
-        this.quantity--;
-      }
-    },
-  },
-};
+}
 </script>
