@@ -13,7 +13,7 @@
           <button
             data-testid="-"
             class="text-gray-500 focus:outline-none focus:text-gray-600"
-            @click="quantity--"
+            @click="decrease"
           >
             <svg
               class="h-5 w-5"
@@ -69,6 +69,13 @@ export default {
     return {
       quantity: 1,
     }
+  },
+  methods: {
+    decrease() {
+      if (this.quantity > 0) {
+        this.quantity--
+      }
+    },
   },
 }
 </script>
