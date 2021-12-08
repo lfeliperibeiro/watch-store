@@ -17,4 +17,10 @@ export class CartManager {
 
     return this.state
   }
+
+  close() {
+    this.state.open = false
+
+    return this.state
+  }
 }
