@@ -1,11 +1,11 @@
 <template>
   <div class="flex justify-between mt-6">
     <div class="flex">
-      <!--      <img-->
-      <!--        class="h-20 w-20 object-cover rounded"-->
-      <!--        :src="product.image"-->
-      <!--        :alt="product.title"-->
-      <!--      />-->
+      <img
+        class="h-20 w-20 object-cover rounded"
+        :src="product.image"
+        :alt="product.title"
+      />
       <div class="mx-3">
         <h3 class="text-sm text-gray-600">{{ product.title }}</h3>
         <button data-testid="remove-button">remover</button>
@@ -52,7 +52,7 @@
         </div>
       </div>
     </div>
-    <span class="text-gray-600">${{ product.price }}}</span>
+    <span class="text-gray-600">${{ product.price }}</span>
   </div>
 </template>
 
