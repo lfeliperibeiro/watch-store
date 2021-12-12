@@ -47,4 +47,10 @@ export class CartManager {
     this.state.items = []
     return this.state
   }
+
+  clearCart() {
+    this.clearProducts()
+    this.close()
+    return this.state
+  }
 }
