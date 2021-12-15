@@ -53,6 +53,12 @@ export default {
       }
       return this.products
     },
+    quantityLabel() {
+      const {
+        list: { length },
+      } = this
+      return length === 1 ? `${length} product` : `${length} products`
+    },
   },
   async created() {
     try {
