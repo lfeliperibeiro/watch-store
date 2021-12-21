@@ -2,6 +2,7 @@ import { makeServer } from '../../miragejs/server'
 
 context('Store', () => {
   let server
+  const g = cy.get
   beforeEach(() => {
     server = makeServer({ environment: 'test' })
   })
@@ -12,52 +13,59 @@ context('Store', () => {
   it('should display the store', () => {
     cy.visit('/')
 
-    cy.get('body').contains('Brand')
-    cy.get('body').contains('Wrist Watch')
+    g('body').contains('Brand')
+    g('body').contains('Wrist Watch')
   })
 
   context('Store > Shopping Cart', () => {
-    it('should not display shopping cart when page first loads', () => {
+    beforeEach(() => {
+      server.createList('product', 10)
       cy.visit('/')
-      cy.get('[data-testid="shopping-cart"]').should('have.class', 'hidden')
+    })
+    it('should not display shopping cart when page first loads', () => {
+      g('[data-testid="shopping-cart"]').should('have.class', 'hidden')
     })
 
-    it.only('should toggle shopping cart visibility when button is clicked', () => {
-      cy.visit('/')
-      cy.get('[data-testid="toggle-button"]').as('toggleButton')
-      cy.get('@toggleButton').click()
-      cy.get('[data-testid="shopping-cart"]').should('not.have.class', 'hidden')
-      cy.get('@toggleButton').click({ force: true })
-      cy.get('[data-testid="shopping-cart"]').should('have.class', 'hidden')
+    it('should toggle shopping cart visibility when button is clicked', () => {
+      g('[data-testid="toggle-button"]').as('toggleButton')
+      g('@toggleButton').click()
+      g('[data-testid="shopping-cart"]').should('not.have.class', 'hidden')
+      g('@toggleButton').click({ force: true })
+      g('[data-testid="shopping-cart"]').should('have.class', 'hidden')
+    })
+
+    it.only('should open shopping cart when a product is added', () => {
+      g('[data-testid="product-card"]').first().find('button').click()
+      g('[data-testid="shopping-cart"]').should('not.have.class', 'hidden')
     })
   })
 
   context('Store > Product List', () => {
     it('should display "0 products" when no products is returned', () => {
       cy.visit('/')
-      cy.get('[data-testid="product-card"]').should('have.length', 0)
-      cy.get('body').contains('0 products')
+      g('[data-testid="product-card"]').should('have.length', 0)
+      g('body').contains('0 products')
     })
 
     it('should display "1 product" when 1 product is returned', () => {
       server.create('product')
       cy.visit('/')
-      cy.get('[data-testid="product-card"]').should('have.length', 1)
-      cy.get('body').contains('1 product')
+      g('[data-testid="product-card"]').should('have.length', 1)
+      g('body').contains('1 product')
     })
 
     it('should display "10 products" when 10 products are returned', () => {
       server.createList('product', 10)
       cy.visit('/')
-      cy.get('[data-testid="product-card"]').should('have.length', 10)
-      cy.get('body').contains('10 products')
+      g('[data-testid="product-card"]').should('have.length', 10)
+      g('body').contains('10 products')
     })
   })
 
   context('Store > Search for products', () => {
     it('should type in the search field ', () => {
       cy.visit('/')
-      cy.get('input[type=search]')
+      g('input[type=search]')
         .type('Some text here')
         .should('have.value', 'Some text here')
     })
@@ -70,10 +78,10 @@ context('Store', () => {
 
       cy.visit('/')
 
-      cy.get('input[type="search"]').type('relogio')
-      cy.get('[data-testid="search-form"]').submit()
+      g('input[type="search"]').type('relogio')
+      g('[data-testid="search-form"]').submit()
 
-      cy.get('[data-testid="product-card"]').should('have.length', 1)
+      g('[data-testid="product-card"]').should('have.length', 1)
     })
 
     it('should not return any product', () => {
@@ -82,11 +90,11 @@ context('Store', () => {
 
       cy.visit('/')
 
-      cy.get('input[type="search"]').type('relogio')
-      cy.get('[data-testid="search-form"]').submit()
+      g('input[type="search"]').type('relogio')
+      g('[data-testid="search-form"]').submit()
 
-      cy.get('[data-testid="product-card"]').should('have.length', 0)
-      cy.get('body').contains('0 products')
+      g('[data-testid="product-card"]').should('have.length', 0)
+      g('body').contains('0 products')
     })
   })
 })
