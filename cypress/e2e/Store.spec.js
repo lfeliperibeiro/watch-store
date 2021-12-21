@@ -34,9 +34,14 @@ context('Store', () => {
       g('[data-testid="shopping-cart"]').should('have.class', 'hidden')
     })
 
-    it.only('should open shopping cart when a product is added', () => {
+    it('should open shopping cart when a product is added', () => {
       g('[data-testid="product-card"]').first().find('button').click()
       g('[data-testid="shopping-cart"]').should('not.have.class', 'hidden')
+    })
+
+    it.only('should add first product to the cart', () => {
+      g('[data-testid="product-card"]').first().find('button').click()
+      g('[data-testid="cart-item"]').should('have.length', 1)
     })
   })
 
