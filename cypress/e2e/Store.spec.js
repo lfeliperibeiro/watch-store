@@ -60,6 +60,17 @@ context('Store', () => {
       cy.addToCart({ indexes: 'all' })
       gid('cart-item').should('have.length', quantity)
     })
+
+    it.only('should remove a product from cart', () => {
+      cy.addToCart({ index: 2 })
+
+      gid('cart-item').as('cartItems')
+
+      g('@cartItems').should('have.length', 1)
+
+      g('@cartItems').find('[data-testid="remove-button"]').click()
+      g('@cartItems').should('have.length', 0)
+    })
   })
 
   context('Store > Product List', () => {
