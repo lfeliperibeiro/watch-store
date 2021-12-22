@@ -36,7 +36,7 @@ context('Store', () => {
       gid('shopping-cart').should('have.class', 'hidden')
     })
 
-    it.only('should display "Cart is empty" message when there are no products', () => {
+    it('should display "Cart is empty" message when there are no products', () => {
       gid('toggle-button').as('toggleButton')
       g('@toggleButton').click()
       gid('shopping-cart').contains('Cart is empty')
@@ -76,6 +76,13 @@ context('Store', () => {
 
       g('@cartItems').find('[data-testid="remove-button"]').click()
       g('@cartItems').should('have.length', 0)
+    })
+
+    it('should clear cart when "Clear cart" button is clicked', () => {
+      cy.addToCart({ indexes: [1, 2, 3] })
+      gid('cart-item').should('have.length', 3)
+      gid('clear-cart-button').click()
+      gid('cart-item').should('have.length', 0)
     })
   })
 
