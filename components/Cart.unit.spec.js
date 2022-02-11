@@ -103,4 +103,23 @@ describe('Cart', () => {
 
     expect(spy).toHaveBeenCalledTimes(1)
   })
+
+  it('should display an input type email when there are items in the cart', () => {
+    const {wrapper} = mountCart()
+    const input = wrapper.find('input[type="email"]');
+    expect(input.exists()).toBe(true)
+  })
+
+  it('should hide the input type e-mail when there are no items in the cart', async () => {
+    const {wrapper} = mountCart()
+    wrapper.setProps({
+      products: [],
+    })
+
+    await Vue.nextTick()
+
+    const input = wrapper.find('input[type="email"]');
+
+    expect(input.exists()).toBe(false)
+  })
 })
