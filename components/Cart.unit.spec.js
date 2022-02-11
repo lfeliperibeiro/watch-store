@@ -122,4 +122,30 @@ describe('Cart', () => {
 
     expect(input.exists()).toBe(false)
   })
+
+  it('should emit checkout and send email when checkout button is clicked', async () => {
+    const {wrapper} = mountCart()
+    const form = wrapper.find('[data-testid="checkout-form"]');
+    const input = wrapper.find('input[type="email"]')
+    const email = 'email@email.com'
+
+
+    input.setValue(email)
+
+    await form.trigger('submit')
+
+    expect(wrapper.emitted().checkout).toBeTruthy()
+    expect(wrapper.emitted().checkout).toHaveLength(1)
+    expect(wrapper.emitted().checkout[0][0]).toEqual({email})
+  })
+
+  it('should NOT emit checkout events when input email is empty', async () => {
+    const {wrapper} = mountCart()
+    const button = wrapper.find('[data-testid="checkout-button"]');
+
+
+    await button.trigger('click')
+
+    expect(wrapper.emitted().checkout).toBeFalsy()
+  })
 })
