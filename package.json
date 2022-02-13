@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "dev:api": "USE_API=true nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -17,7 +18,6 @@
     "test:coverage": "jest --coverage",
     "test:e2e": "start-server-and-test dev 3000 cypress:open",
     "test:headless": "start-server-and-test dev 3000 cypress:run"
-
   },
   "lint-staged": {
     "*.{js,vue}": "eslint"
@@ -46,6 +46,7 @@
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.12.1",
     "faker": "^5.5.3",
+    "flush-promises": "^1.0.2",
     "husky": "^6.0.0",
     "jest": "^27.0.5",
     "lint-staged": "^10.5.4",

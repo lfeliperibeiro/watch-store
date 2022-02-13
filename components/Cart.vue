@@ -119,6 +119,7 @@
 
 <script>
 import CartItem from './CartItem'
+
 export default {
   components: { CartItem },
   props: {
@@ -130,6 +131,12 @@ export default {
       type: Array,
       default: () => [],
     },
+
+  },
+  data(){
+    return{
+      email: ''
+    };
   },
   computed: {
     hasProducts() {
@@ -140,6 +147,12 @@ export default {
     close() {
       this.$emit('close')
     },
+    checkout(){
+      if(this.email){
+        this.$emit('checkout', {email: this.email})
+      }
+
+    }
   },
 }
 </script>

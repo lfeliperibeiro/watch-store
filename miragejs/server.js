@@ -5,13 +5,19 @@ import models from './models';
 import seeds from './seeds';
 
 const config = (environment) => {
-  return {
+  const config = {
     environment,
     factories,
     models,
     routes,
     seeds,
   };
+
+
+    config.urlPrefix = 'http://localhost:5000';
+
+
+  return config;
 };
 
 export function makeServer({ environment = 'development' } = {}) {
