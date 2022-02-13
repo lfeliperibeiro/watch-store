@@ -37,6 +37,10 @@ export default {
     '@nuxtjs/pwa',
   ],
 
+  env: {
+    USE_API: !!process.env.USE_API,
+  },
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
