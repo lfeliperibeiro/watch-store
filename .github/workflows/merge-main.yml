@@ -44,5 +44,5 @@ jobs:
 
         with:
           args: deploy --dir=dist --prod
-          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]' 13384db3-aa35-4422-91ce-0005c4294a7c
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
 
